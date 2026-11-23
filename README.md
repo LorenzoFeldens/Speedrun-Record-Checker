@@ -28,6 +28,8 @@ O processo roda no Orchestrator a cada 15 minutos. Em cada execução:
 7. Grava o horário da verificação. Se algo falhar, envia um e-mail com o erro e mantém o horário anterior,
    para que a próxima tentativa cubra o período perdido.
 
+O passo a passo completo, com diagrama, está em **[WORKFLOW.md](WORKFLOW.md)**.
+
 ## Configuração no Orchestrator
 
 Tudo fica na pasta **SpeedrunRecordChecker**.
