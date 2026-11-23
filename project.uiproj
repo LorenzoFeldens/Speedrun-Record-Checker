@@ -1,0 +1,6 @@
+{
+  "Name": "Speedrun Record Checker",
+  "ProjectType": "Process",
+  "Description": "Daily check for new world records in Resident Evil and Dino Crisis games on speedrun.com; e-mails each new record with its video link.",
+  "MainFile": "Main.xaml"
+}

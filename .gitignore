@@ -1,0 +1,11 @@
+# UiPath generated, never commit
+.local/
+.tmh/
+.storage/
+*.nupkg
+
+# Claude Code personal settings
+.claude/settings.local.json
+
+# Office lock files
+~$*

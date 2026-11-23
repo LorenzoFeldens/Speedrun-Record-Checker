@@ -1,0 +1,200 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" this:Main.in_AssetFolder="SpeedrunRecordChecker" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1"
+xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib"
+xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib"
+xmlns:this="clr-namespace:"
+xmlns:uga="clr-namespace:UiPath.GSuite.Activities;assembly=UiPath.GSuite.Activities"
+xmlns:ugage="clr-namespace:UiPath.GSuite.Activities.Gmail.Enums;assembly=UiPath.GSuite.Activities"
+xmlns:ui="http://schemas.uipath.com/workflow/activities"
+xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.GSuite.Activities"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <x:Members>
+        <x:Property Name="in_AssetFolder" Type="InArgument(x:String)" />
+    </x:Members>
+    <TextExpression.NamespacesForImplementation>
+        <sco:Collection x:TypeArguments="x:String">
+            <x:String>System.Activities</x:String>
+            <x:String>System.Activities.Statements</x:String>
+            <x:String>System.Activities.Expressions</x:String>
+            <x:String>System.Activities.Validation</x:String>
+            <x:String>System.Activities.XamlIntegration</x:String>
+            <x:String>Microsoft.VisualBasic</x:String>
+            <x:String>Microsoft.VisualBasic.Activities</x:String>
+            <x:String>System</x:String>
+            <x:String>System.Collections</x:String>
+            <x:String>System.Collections.Generic</x:String>
+            <x:String>System.Collections.ObjectModel</x:String>
+            <x:String>System.Data</x:String>
+            <x:String>System.Diagnostics</x:String>
+            <x:String>System.IO</x:String>
+            <x:String>System.Linq</x:String>
+            <x:String>System.Xml</x:String>
+            <x:String>System.Xml.Linq</x:String>
+            <x:String>UiPath.Core</x:String>
+            <x:String>UiPath.Core.Activities</x:String>
+            <x:String>System.Windows.Markup</x:String>
+            <x:String>UiPath.GSuite.Activities</x:String>
+            <x:String>UiPath.GSuite.Activities.Gmail.Enums</x:String>
+        </sco:Collection>
+    </TextExpression.NamespacesForImplementation>
+    <TextExpression.ReferencesForImplementation>
+        <sco:Collection x:TypeArguments="AssemblyReference">
+            <AssemblyReference>System.Activities</AssemblyReference>
+            <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+            <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+            <AssemblyReference>mscorlib</AssemblyReference>
+            <AssemblyReference>System.Data</AssemblyReference>
+            <AssemblyReference>System</AssemblyReference>
+            <AssemblyReference>System.Linq</AssemblyReference>
+            <AssemblyReference>System.Data.Common</AssemblyReference>
+            <AssemblyReference>System.Core</AssemblyReference>
+            <AssemblyReference>System.Xml</AssemblyReference>
+            <AssemblyReference>System.Xml.Linq</AssemblyReference>
+            <AssemblyReference>System.Xaml</AssemblyReference>
+            <AssemblyReference>System.Collections</AssemblyReference>
+            <AssemblyReference>System.Net.Http</AssemblyReference>
+            <AssemblyReference>System.Net.Primitives</AssemblyReference>
+            <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+            <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+            <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+        </sco:Collection>
+    </TextExpression.ReferencesForImplementation>
+    <Sequence DisplayName="Speedrun Record Checker" sap2010:WorkflowViewState.IdRef="Sequence_1">
+        <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="sendTo" />
+            <Variable x:TypeArguments="x:String" Name="executeTime" />
+            <Variable x:TypeArguments="x:String" Name="gameList" />
+            <Variable x:TypeArguments="x:Boolean" Name="shouldRun" />
+            <Variable x:TypeArguments="x:String" Name="scheduleInfo" />
+            <Variable x:TypeArguments="x:Int32" Name="recordCount" />
+            <Variable x:TypeArguments="x:String" Name="htmlBody" />
+            <Variable x:TypeArguments="x:String" Name="checkedUntil" />
+            <Variable x:TypeArguments="x:String" Name="stateFile" Default="[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), &quot;SpeedrunRecordChecker&quot;, &quot;last-check.txt&quot;)]" />
+            <Variable x:TypeArguments="x:String" Name="cacheFile" Default="[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), &quot;SpeedrunRecordChecker&quot;, &quot;execute-time.txt&quot;)]" />
+        </Sequence.Variables>
+        <TryCatch DisplayName="Try – Verificar recordes" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <TryCatch.Try>
+                <Sequence DisplayName="Try" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="SendTo" CacheStrategy="None" DisplayName="Get Asset – SendTo" FolderPath="[in_AssetFolder]" sap2010:WorkflowViewState.IdRef="GetRobotAsset_3">
+                        <ui:GetRobotAsset.Value>
+                            <OutArgument x:TypeArguments="x:String">[sendTo]</OutArgument>
+                        </ui:GetRobotAsset.Value>
+                    </ui:GetRobotAsset>
+                    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="ExecuteTime" CacheStrategy="None" DisplayName="Get Asset – ExecuteTime" FolderPath="[in_AssetFolder]" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+                        <ui:GetRobotAsset.Value>
+                            <OutArgument x:TypeArguments="x:String">[executeTime]</OutArgument>
+                        </ui:GetRobotAsset.Value>
+                    </ui:GetRobotAsset>
+                    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="GameList" CacheStrategy="None" DisplayName="Get Asset – GameList" FolderPath="[in_AssetFolder]" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
+                        <ui:GetRobotAsset.Value>
+                            <OutArgument x:TypeArguments="x:String">[gameList]</OutArgument>
+                        </ui:GetRobotAsset.Value>
+                    </ui:GetRobotAsset>
+                    <ui:InvokeCode DisplayName="Verificar horário de execução" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="VBNet" Code="' Decides whether today's check should run now, based on the ExecuteTime asset (local machine time).&#xA;' In:  executeTime (&quot;08:00&quot;, &quot;8&quot;, &quot;8h&quot;, &quot;8h30&quot;), stateFile, cacheFile   Out: shouldRun, scheduleInfo&#xA;Dim txt As String = executeTime.Trim().ToLowerInvariant().Replace(&quot;h&quot;, &quot;:&quot;)&#xA;Dim parts As String() = txt.Split(&quot;:&quot;c)&#xA;Dim hh As Integer = -1&#xA;Dim mm As Integer = 0&#xA;If Not Integer.TryParse(parts(0).Trim(), hh) OrElse (parts.Length &gt; 1 AndAlso parts(1).Trim() &lt;&gt; &quot;&quot; AndAlso Not Integer.TryParse(parts(1).Trim(), mm)) OrElse hh &lt; 0 OrElse hh &gt; 23 OrElse mm &lt; 0 OrElse mm &gt; 59 Then&#xA;  Throw New Exception(&quot;O asset ExecuteTime tem um horário inválido: &quot;&quot;&quot; &amp; executeTime &amp; &quot;&quot;&quot;. Use o formato HH:mm, por exemplo 08:00.&quot;)&#xA;End If&#xA;Dim execAt As New TimeSpan(hh, mm, 0)&#xA;&#xA;' run-daily.ps1 reads this file to avoid starting the robot before the execution time.&#xA;System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(cacheFile))&#xA;System.IO.File.WriteAllText(cacheFile, execAt.ToString(&quot;hh\:mm&quot;))&#xA;&#xA;Dim ranToday As Boolean = False&#xA;If System.IO.File.Exists(stateFile) Then&#xA;  Dim last As DateTime&#xA;  If DateTime.TryParse(System.IO.File.ReadAllText(stateFile).Trim(), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeUniversal Or System.Globalization.DateTimeStyles.AdjustToUniversal, last) Then ranToday = (last.ToLocalTime().Date = DateTime.Today)&#xA;End If&#xA;&#xA;If ranToday Then&#xA;  shouldRun = False&#xA;  scheduleInfo = &quot;A verificação de hoje já foi feita.&quot;&#xA;ElseIf DateTime.Now.TimeOfDay &lt; execAt Then&#xA;  shouldRun = False&#xA;  scheduleInfo = &quot;Ainda não é &quot; &amp; execAt.ToString(&quot;hh\:mm&quot;) &amp; &quot; (asset ExecuteTime).&quot;&#xA;Else&#xA;  shouldRun = True&#xA;  scheduleInfo = &quot;Horário de execução &quot; &amp; execAt.ToString(&quot;hh\:mm&quot;) &amp; &quot; atingido.&quot;&#xA;End If">
+                        <ui:InvokeCode.Arguments>
+                            <scg:Dictionary x:TypeArguments="x:String, Argument">
+                                <InArgument x:TypeArguments="x:String" x:Key="executeTime">[executeTime]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="stateFile">[stateFile]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="cacheFile">[cacheFile]</InArgument>
+                                <OutArgument x:TypeArguments="x:Boolean" x:Key="shouldRun">[shouldRun]</OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="scheduleInfo">[scheduleInfo]</OutArgument>
+                            </scg:Dictionary>
+                        </ui:InvokeCode.Arguments>
+                    </ui:InvokeCode>
+                    <If Condition="[shouldRun]" DisplayName="If – Hora de verificar" sap2010:WorkflowViewState.IdRef="If_2">
+                        <If.Then>
+                            <Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                <ui:LogMessage DisplayName="Log – Início" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[scheduleInfo &amp; &quot; Procurando novos recordes mundiais em: &quot; &amp; gameList]" />
+                                <ui:InvokeCode DisplayName="Buscar novos recordes mundiais (API speedrun.com)" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="VBNet" Code="' Finds runs verified since the last check that are now #1 on their leaderboard.&#xA;' In:  gameList (asset GameList: series or game names, separated by comma, semicolon or line break), stateFile&#xA;' Out: recordCount, htmlBody (pt-BR e-mail), checkedUntil (UTC timestamp to save after the e-mail is sent)&#xA;Dim inv As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture&#xA;Dim br As System.Globalization.CultureInfo = New System.Globalization.CultureInfo(&quot;pt-BR&quot;)&#xA;Dim runStart As DateTime = DateTime.UtcNow&#xA;Dim lastCheck As DateTime = runStart.AddDays(-1)&#xA;System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(stateFile))&#xA;If System.IO.File.Exists(stateFile) Then&#xA;  Dim parsed As DateTime&#xA;  If DateTime.TryParse(System.IO.File.ReadAllText(stateFile).Trim(), inv, System.Globalization.DateTimeStyles.AssumeUniversal Or System.Globalization.DateTimeStyles.AdjustToUniversal, parsed) Then lastCheck = parsed&#xA;End If&#xA;checkedUntil = runStart.ToString(&quot;yyyy-MM-ddTHH:mm:ssZ&quot;, inv)&#xA;&#xA;Dim http As New System.Net.Http.HttpClient()&#xA;http.Timeout = TimeSpan.FromSeconds(60)&#xA;http.DefaultRequestHeaders.UserAgent.ParseAdd(&quot;SpeedrunRecordChecker/1.0&quot;)&#xA;&#xA;' speedrun.com allows ~100 requests/minute: pause between calls and back off on 420/5xx.&#xA;Dim getJson As Func(Of String, Newtonsoft.Json.Linq.JObject) = Function(url As String)&#xA;  For attempt As Integer = 1 To 4&#xA;    System.Threading.Thread.Sleep(700)&#xA;    Dim resp As System.Net.Http.HttpResponseMessage = http.GetAsync(url).Result&#xA;    Dim status As Integer = CInt(resp.StatusCode)&#xA;    If status = 420 OrElse status = 429 OrElse status &gt;= 500 Then&#xA;      System.Threading.Thread.Sleep(15000 * attempt)&#xA;    Else&#xA;      resp.EnsureSuccessStatusCode()&#xA;      Return Newtonsoft.Json.Linq.JObject.Parse(resp.Content.ReadAsStringAsync().Result)&#xA;    End If&#xA;  Next&#xA;  Throw New Exception(&quot;A API do speedrun.com continua falhando para &quot; &amp; url)&#xA;End Function&#xA;&#xA;Dim nextLink As Func(Of Newtonsoft.Json.Linq.JObject, String) = Function(page As Newtonsoft.Json.Linq.JObject)&#xA;  Dim pag As Newtonsoft.Json.Linq.JToken = page(&quot;pagination&quot;)&#xA;  If pag Is Nothing OrElse pag(&quot;links&quot;) Is Nothing Then Return Nothing&#xA;  For Each l As Newtonsoft.Json.Linq.JToken In pag(&quot;links&quot;)&#xA;    If l(&quot;rel&quot;).ToString() = &quot;next&quot; Then Return l(&quot;uri&quot;).ToString()&#xA;  Next&#xA;  Return Nothing&#xA;End Function&#xA;&#xA;Dim enc As Func(Of String, String) = Function(s As String) System.Net.WebUtility.HtmlEncode(s)&#xA;&#xA;' Picks the result whose name or abbreviation matches exactly; otherwise the first result.&#xA;Dim pickMatch As Func(Of Newtonsoft.Json.Linq.JToken, String, Newtonsoft.Json.Linq.JObject) = Function(data As Newtonsoft.Json.Linq.JToken, wanted As String)&#xA;  Dim first As Newtonsoft.Json.Linq.JObject = Nothing&#xA;  For Each item As Newtonsoft.Json.Linq.JObject In data&#xA;    If first Is Nothing Then first = item&#xA;    If String.Equals(item(&quot;names&quot;)(&quot;international&quot;).ToString(), wanted, StringComparison.OrdinalIgnoreCase) OrElse String.Equals(item(&quot;abbreviation&quot;).ToString(), wanted, StringComparison.OrdinalIgnoreCase) Then Return item&#xA;  Next&#xA;  Return first&#xA;End Function&#xA;&#xA;' 1. Resolve each GameList entry to a series (all its games) or, failing that, to a single game.&#xA;Dim games As New List(Of Newtonsoft.Json.Linq.JObject)&#xA;Dim seenGames As New HashSet(Of String)&#xA;Dim seriesNames As New List(Of String)&#xA;For Each rawName As String In gameList.Split(New Char() {&quot;,&quot;c, &quot;;&quot;c, ChrW(10), ChrW(13)}, StringSplitOptions.RemoveEmptyEntries)&#xA;  Dim wanted As String = rawName.Trim()&#xA;  If wanted = &quot;&quot; Then Continue For&#xA;  Dim series As Newtonsoft.Json.Linq.JObject = pickMatch(getJson(&quot;https://www.speedrun.com/api/v1/series?max=20&amp;name=&quot; &amp; Uri.EscapeDataString(wanted))(&quot;data&quot;), wanted)&#xA;  If series IsNot Nothing Then&#xA;    seriesNames.Add(series(&quot;names&quot;)(&quot;international&quot;).ToString())&#xA;    Dim url As String = &quot;https://www.speedrun.com/api/v1/series/&quot; &amp; series(&quot;id&quot;).ToString() &amp; &quot;/games?max=200&quot;&#xA;    While url IsNot Nothing&#xA;      Dim page As Newtonsoft.Json.Linq.JObject = getJson(url)&#xA;      For Each g As Newtonsoft.Json.Linq.JObject In page(&quot;data&quot;)&#xA;        If seenGames.Add(g(&quot;id&quot;).ToString()) Then games.Add(g)&#xA;      Next&#xA;      url = nextLink(page)&#xA;    End While&#xA;  Else&#xA;    Dim game As Newtonsoft.Json.Linq.JObject = pickMatch(getJson(&quot;https://www.speedrun.com/api/v1/games?max=20&amp;name=&quot; &amp; Uri.EscapeDataString(wanted))(&quot;data&quot;), wanted)&#xA;    If game Is Nothing Then Throw New Exception(&quot;Nenhuma série ou jogo encontrado no speedrun.com para &quot;&quot;&quot; &amp; wanted &amp; &quot;&quot;&quot; (asset GameList).&quot;)&#xA;    seriesNames.Add(game(&quot;names&quot;)(&quot;international&quot;).ToString())&#xA;    If seenGames.Add(game(&quot;id&quot;).ToString()) Then games.Add(game)&#xA;  End If&#xA;Next&#xA;If games.Count = 0 Then Throw New Exception(&quot;O asset GameList não tem nenhum nome de série ou jogo.&quot;)&#xA;&#xA;' 2. Runs verified in (lastCheck, runStart] that hold first place on their leaderboard.&#xA;Dim sb As New System.Text.StringBuilder()&#xA;Dim count As Integer = 0&#xA;For Each g As Newtonsoft.Json.Linq.JObject In games&#xA;  Dim gameId As String = g(&quot;id&quot;).ToString()&#xA;  Dim gameName As String = g(&quot;names&quot;)(&quot;international&quot;).ToString()&#xA;  Dim runsUrl As String = &quot;https://www.speedrun.com/api/v1/runs?game=&quot; &amp; gameId &amp; &quot;&amp;status=verified&amp;orderby=verify-date&amp;direction=desc&amp;max=50&amp;embed=players,category.variables,level&quot;&#xA;  Dim reachedOld As Boolean = False&#xA;  While runsUrl IsNot Nothing AndAlso Not reachedOld&#xA;    Dim page As Newtonsoft.Json.Linq.JObject = getJson(runsUrl)&#xA;    runsUrl = nextLink(page)&#xA;    For Each run As Newtonsoft.Json.Linq.JObject In page(&quot;data&quot;)&#xA;      Dim vdTok As Newtonsoft.Json.Linq.JToken = run(&quot;status&quot;)(&quot;verify-date&quot;)&#xA;      If vdTok Is Nothing OrElse vdTok.Type = Newtonsoft.Json.Linq.JTokenType.Null Then Continue For&#xA;      Dim verified As DateTime = vdTok.ToObject(Of DateTime)().ToUniversalTime()&#xA;      If verified &lt;= lastCheck Then&#xA;        reachedOld = True&#xA;        Exit For&#xA;      End If&#xA;      If verified &gt; runStart Then Continue For&#xA;&#xA;      Dim cat As Newtonsoft.Json.Linq.JObject = CType(run(&quot;category&quot;)(&quot;data&quot;), Newtonsoft.Json.Linq.JObject)&#xA;      Dim lvl As Newtonsoft.Json.Linq.JObject = TryCast(run(&quot;level&quot;)(&quot;data&quot;), Newtonsoft.Json.Linq.JObject)&#xA;      Dim lbUrl As String = &quot;https://www.speedrun.com/api/v1/leaderboards/&quot; &amp; gameId&#xA;      If lvl Is Nothing Then&#xA;        lbUrl &amp;= &quot;/category/&quot; &amp; cat(&quot;id&quot;).ToString() &amp; &quot;?top=1&quot;&#xA;      Else&#xA;        lbUrl &amp;= &quot;/level/&quot; &amp; lvl(&quot;id&quot;).ToString() &amp; &quot;/&quot; &amp; cat(&quot;id&quot;).ToString() &amp; &quot;?top=1&quot;&#xA;      End If&#xA;      Dim subLabels As New List(Of String)&#xA;      For Each v As Newtonsoft.Json.Linq.JObject In cat(&quot;variables&quot;)(&quot;data&quot;)&#xA;        If v(&quot;is-subcategory&quot;).ToObject(Of Boolean)() Then&#xA;          Dim vid As String = v(&quot;id&quot;).ToString()&#xA;          Dim val As Newtonsoft.Json.Linq.JToken = run(&quot;values&quot;)(vid)&#xA;          If val IsNot Nothing Then&#xA;            lbUrl &amp;= &quot;&amp;var-&quot; &amp; vid &amp; &quot;=&quot; &amp; val.ToString()&#xA;            Dim lab As Newtonsoft.Json.Linq.JToken = v(&quot;values&quot;)(&quot;values&quot;)(val.ToString())&#xA;            If lab IsNot Nothing Then subLabels.Add(lab(&quot;label&quot;).ToString())&#xA;          End If&#xA;        End If&#xA;      Next&#xA;&#xA;      Dim board As Newtonsoft.Json.Linq.JToken = getJson(lbUrl)(&quot;data&quot;)&#xA;      Dim isRecord As Boolean = False&#xA;      For Each entry As Newtonsoft.Json.Linq.JToken In board(&quot;runs&quot;)&#xA;        If entry(&quot;place&quot;).ToObject(Of Integer)() = 1 AndAlso entry(&quot;run&quot;)(&quot;id&quot;).ToString() = run(&quot;id&quot;).ToString() Then isRecord = True&#xA;      Next&#xA;      If Not isRecord Then Continue For&#xA;&#xA;      count += 1&#xA;      Dim category As String = cat(&quot;name&quot;).ToString()&#xA;      If lvl IsNot Nothing Then category = lvl(&quot;name&quot;).ToString() &amp; &quot; – &quot; &amp; category&#xA;      If subLabels.Count &gt; 0 Then category &amp;= &quot; (&quot; &amp; String.Join(&quot;, &quot;, subLabels) &amp; &quot;)&quot;&#xA;      Dim players As New List(Of String)&#xA;      For Each p As Newtonsoft.Json.Linq.JToken In run(&quot;players&quot;)(&quot;data&quot;)&#xA;        If p(&quot;rel&quot;) IsNot Nothing AndAlso p(&quot;rel&quot;).ToString() = &quot;user&quot; Then&#xA;          players.Add(p(&quot;names&quot;)(&quot;international&quot;).ToString())&#xA;        ElseIf p(&quot;name&quot;) IsNot Nothing Then&#xA;          players.Add(p(&quot;name&quot;).ToString())&#xA;        End If&#xA;      Next&#xA;      Dim t As TimeSpan = TimeSpan.FromSeconds(run(&quot;times&quot;)(&quot;primary_t&quot;).ToObject(Of Double)())&#xA;      Dim timeText As String = If(t.TotalHours &gt;= 1, CInt(Math.Floor(t.TotalHours)).ToString() &amp; &quot;h &quot;, &quot;&quot;) &amp; t.Minutes.ToString() &amp; &quot;min &quot; &amp; t.Seconds.ToString(&quot;00&quot;) &amp; &quot;s&quot; &amp; If(t.Milliseconds &gt; 0, &quot; &quot; &amp; t.Milliseconds.ToString(&quot;000&quot;) &amp; &quot;ms&quot;, &quot;&quot;)&#xA;      Dim videoUrl As String = Nothing&#xA;      Dim vids As Newtonsoft.Json.Linq.JToken = run(&quot;videos&quot;)&#xA;      If vids IsNot Nothing AndAlso vids.Type &lt;&gt; Newtonsoft.Json.Linq.JTokenType.Null AndAlso vids(&quot;links&quot;) IsNot Nothing AndAlso vids(&quot;links&quot;).HasValues Then videoUrl = vids(&quot;links&quot;)(0)(&quot;uri&quot;).ToString()&#xA;      Dim played As String = &quot;-&quot;&#xA;      Dim playedDate As DateTime&#xA;      If run(&quot;date&quot;) IsNot Nothing AndAlso run(&quot;date&quot;).Type &lt;&gt; Newtonsoft.Json.Linq.JTokenType.Null AndAlso DateTime.TryParseExact(run(&quot;date&quot;).ToString(), &quot;yyyy-MM-dd&quot;, inv, System.Globalization.DateTimeStyles.None, playedDate) Then played = playedDate.ToString(&quot;dd/MM/yyyy&quot;, br)&#xA;&#xA;      sb.Append(&quot;&lt;div style=&quot;&quot;border:1px solid #ddd;border-radius:8px;padding:12px 16px;margin:0 0 14px 0;font-family:Arial,sans-serif&quot;&quot;&gt;&quot;)&#xA;      sb.Append(&quot;&lt;h3 style=&quot;&quot;margin:0 0 6px 0&quot;&quot;&gt;&quot; &amp; enc(gameName) &amp; &quot;&lt;/h3&gt;&quot;)&#xA;      sb.Append(&quot;&lt;p style=&quot;&quot;margin:0 0 10px 0;color:#555&quot;&quot;&gt;&quot; &amp; enc(category) &amp; &quot;&lt;/p&gt;&quot;)&#xA;      sb.Append(&quot;&lt;table style=&quot;&quot;border-collapse:collapse;font-size:14px&quot;&quot;&gt;&quot;)&#xA;      sb.Append(&quot;&lt;tr&gt;&lt;td style=&quot;&quot;padding:2px 12px 2px 0;color:#777&quot;&quot;&gt;Tempo&lt;/td&gt;&lt;td&gt;&lt;b&gt;&quot; &amp; enc(timeText) &amp; &quot;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&quot;)&#xA;      sb.Append(&quot;&lt;tr&gt;&lt;td style=&quot;&quot;padding:2px 12px 2px 0;color:#777&quot;&quot;&gt;Jogador&lt;/td&gt;&lt;td&gt;&quot; &amp; enc(String.Join(&quot;, &quot;, players)) &amp; &quot;&lt;/td&gt;&lt;/tr&gt;&quot;)&#xA;      sb.Append(&quot;&lt;tr&gt;&lt;td style=&quot;&quot;padding:2px 12px 2px 0;color:#777&quot;&quot;&gt;Jogado em&lt;/td&gt;&lt;td&gt;&quot; &amp; enc(played) &amp; &quot;&lt;/td&gt;&lt;/tr&gt;&quot;)&#xA;      sb.Append(&quot;&lt;tr&gt;&lt;td style=&quot;&quot;padding:2px 12px 2px 0;color:#777&quot;&quot;&gt;Verificado em&lt;/td&gt;&lt;td&gt;&quot; &amp; verified.ToLocalTime().ToString(&quot;dd/MM/yyyy HH:mm&quot;, br) &amp; &quot;&lt;/td&gt;&lt;/tr&gt;&quot;)&#xA;      sb.Append(&quot;&lt;/table&gt;&lt;p style=&quot;&quot;margin:10px 0 0 0&quot;&quot;&gt;&quot;)&#xA;      If videoUrl IsNot Nothing Then&#xA;        sb.Append(&quot;&lt;a href=&quot;&quot;&quot; &amp; enc(videoUrl) &amp; &quot;&quot;&quot;&gt;▶ Assistir ao vídeo&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &quot;)&#xA;      Else&#xA;        sb.Append(&quot;Sem link de vídeo &amp;nbsp;·&amp;nbsp; &quot;)&#xA;      End If&#xA;      sb.Append(&quot;&lt;a href=&quot;&quot;&quot; &amp; enc(run(&quot;weblink&quot;).ToString()) &amp; &quot;&quot;&quot;&gt;Página da run&lt;/a&gt; &amp;nbsp;·&amp;nbsp; &lt;a href=&quot;&quot;&quot; &amp; enc(board(&quot;weblink&quot;).ToString()) &amp; &quot;&quot;&quot;&gt;Leaderboard&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&quot;)&#xA;    Next&#xA;  End While&#xA;Next&#xA;&#xA;recordCount = count&#xA;htmlBody = &quot;&lt;div style=&quot;&quot;font-family:Arial,sans-serif&quot;&quot;&gt;&lt;p&gt;&quot; &amp; If(count = 1, &quot;1 novo recorde mundial&quot;, count.ToString() &amp; &quot; novos recordes mundiais&quot;) &amp; &quot; em &quot; &amp; enc(String.Join(&quot;, &quot;, seriesNames)) &amp; &quot; desde &quot; &amp; lastCheck.ToLocalTime().ToString(&quot;dd/MM/yyyy HH:mm&quot;, br) &amp; &quot;:&lt;/p&gt;&quot; &amp; sb.ToString() &amp; &quot;&lt;/div&gt;&quot;">
+                                    <ui:InvokeCode.Arguments>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument">
+                                            <InArgument x:TypeArguments="x:String" x:Key="gameList">[gameList]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="stateFile">[stateFile]</InArgument>
+                                            <OutArgument x:TypeArguments="x:Int32" x:Key="recordCount">[recordCount]</OutArgument>
+                                            <OutArgument x:TypeArguments="x:String" x:Key="htmlBody">[htmlBody]</OutArgument>
+                                            <OutArgument x:TypeArguments="x:String" x:Key="checkedUntil">[checkedUntil]</OutArgument>
+                                        </scg:Dictionary>
+                                    </ui:InvokeCode.Arguments>
+                                </ui:InvokeCode>
+                                <If Condition="[recordCount &gt; 0]" DisplayName="If – Novos recordes encontrados" sap2010:WorkflowViewState.IdRef="If_1">
+                                    <If.Then>
+                                        <Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                                            <uga:SendEmailConnections ArgumentAttachmentPaths="{x:Null}" ArgumentAttachments="{x:Null}" AttachmentPaths="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" ReplyTo="{x:Null}" SingleAttachment="{x:Null}" TextBody="{x:Null}" AttachmentInputMode="UseExisting" AuthScopesInvalid="False" Body="[htmlBody]" ConnectionId="d660fbe8-6939-4776-bf9e-fa0e170e3a0b" DisplayName="Send Email – Novos recordes" sap2010:WorkflowViewState.IdRef="SendEmailConnections_1" Importance="Normal" InputType="HTML" SaveAsDraft="False" Subject="[&quot;🏆 &quot; &amp; If(recordCount = 1, &quot;1 novo recorde mundial&quot;, recordCount.ToString &amp; &quot; novos recordes mundiais&quot;) &amp; &quot; no speedrun.com&quot;]" To="[New String(){sendTo}]" UseConnectionService="True">
+                                                <uga:SendEmailConnections.AttachmentsBackup>
+                                                    <usau:BackupSlot x:TypeArguments="ugage:AttachmentInputMode" StoredValue="UseExisting">
+                                                        <usau:BackupSlot.BackupValues>
+                                                            <scg:Dictionary x:TypeArguments="ugage:AttachmentInputMode, scg:List(x:Object)" />
+                                                        </usau:BackupSlot.BackupValues>
+                                                    </usau:BackupSlot>
+                                                </uga:SendEmailConnections.AttachmentsBackup>
+                                                <uga:SendEmailConnections.InputTypeBackup>
+                                                    <usau:BackupSlot x:TypeArguments="ugage:BodyInputType" StoredValue="HTML">
+                                                        <usau:BackupSlot.BackupValues>
+                                                            <scg:Dictionary x:TypeArguments="ugage:BodyInputType, scg:List(x:Object)" />
+                                                        </usau:BackupSlot.BackupValues>
+                                                    </usau:BackupSlot>
+                                                </uga:SendEmailConnections.InputTypeBackup>
+                                            </uga:SendEmailConnections>
+                                            <ui:LogMessage DisplayName="Log – E-mail enviado" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[recordCount.ToString &amp; &quot; novo(s) recorde(s) enviado(s) para &quot; &amp; sendTo]" />
+                                        </Sequence>
+                                    </If.Then>
+                                    <If.Else>
+                                        <Sequence DisplayName="Else" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                                            <ui:LogMessage DisplayName="Log – Nenhum recorde novo" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Nenhum recorde mundial novo desde a última verificação.&quot;]" />
+                                        </Sequence>
+                                    </If.Else>
+                                </If>
+                                <ui:WriteTextFile DisplayName="Salvar horário da última verificação" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" FileName="[stateFile]" Text="[checkedUntil]" />
+                            </Sequence>
+                        </If.Then>
+                        <If.Else>
+                            <Sequence DisplayName="Else" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                <ui:LogMessage DisplayName="Log – Fora do horário" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[scheduleInfo &amp; &quot; Nada a fazer agora.&quot;]" />
+                            </Sequence>
+                        </If.Else>
+                    </If>
+                </Sequence>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                    <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Catch" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                            <ui:LogMessage DisplayName="Log – Falha" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;Speedrun Record Checker falhou: &quot; &amp; exception.GetType.Name &amp; &quot;: &quot; &amp; exception.Message]" />
+                            <If Condition="[Not String.IsNullOrWhiteSpace(sendTo)]" DisplayName="If – Destinatário conhecido" sap2010:WorkflowViewState.IdRef="If_3">
+                                <If.Then>
+                                    <Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                    <uga:SendEmailConnections ArgumentAttachmentPaths="{x:Null}" ArgumentAttachments="{x:Null}" AttachmentPaths="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="True" ReplyTo="{x:Null}" SingleAttachment="{x:Null}" TextBody="{x:Null}" AttachmentInputMode="UseExisting" AuthScopesInvalid="False" Body="[&quot;&lt;p&gt;A verificação diária de recordes do speedrun.com falhou:&lt;/p&gt;&lt;pre&gt;&quot; &amp; System.Net.WebUtility.HtmlEncode(exception.ToString) &amp; &quot;&lt;/pre&gt;&lt;p&gt;O período perdido será verificado de novo na próxima execução.&lt;/p&gt;&quot;]" ConnectionId="d660fbe8-6939-4776-bf9e-fa0e170e3a0b" DisplayName="Send Email – Erro" sap2010:WorkflowViewState.IdRef="SendEmailConnections_2" Importance="Normal" InputType="HTML" SaveAsDraft="False" Subject="[&quot;Falha no Speedrun Record Checker – &quot; &amp; Now.ToString(&quot;dd/MM/yyyy&quot;)]" To="[New String(){sendTo}]" UseConnectionService="True">
+                                        <uga:SendEmailConnections.AttachmentsBackup>
+                                            <usau:BackupSlot x:TypeArguments="ugage:AttachmentInputMode" StoredValue="UseExisting">
+                                                <usau:BackupSlot.BackupValues>
+                                                    <scg:Dictionary x:TypeArguments="ugage:AttachmentInputMode, scg:List(x:Object)" />
+                                                </usau:BackupSlot.BackupValues>
+                                            </usau:BackupSlot>
+                                        </uga:SendEmailConnections.AttachmentsBackup>
+                                        <uga:SendEmailConnections.InputTypeBackup>
+                                            <usau:BackupSlot x:TypeArguments="ugage:BodyInputType" StoredValue="HTML">
+                                                <usau:BackupSlot.BackupValues>
+                                                    <scg:Dictionary x:TypeArguments="ugage:BodyInputType, scg:List(x:Object)" />
+                                                </usau:BackupSlot.BackupValues>
+                                            </usau:BackupSlot>
+                                        </uga:SendEmailConnections.InputTypeBackup>
+                                    </uga:SendEmailConnections>
+                                    </Sequence>
+                                </If.Then>
+                            </If>
+                            <Rethrow DisplayName="Rethrow – Falha" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                        </Sequence>
+                    </ActivityAction>
+                </Catch>
+            </TryCatch.Catches>
+        </TryCatch>
+    </Sequence>
+</Activity>

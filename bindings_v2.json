@@ -1,0 +1,73 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "activityDisplayName": "Get Asset – SendTo",
+      "activityId": "GetRobotAsset_3",
+      "resource": "asset",
+      "key": "SendTo",
+      "id": "assetSendToSendToFalse",
+      "value": {
+        "name": {
+          "defaultValue": "SendTo",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "BindingsVersion": "2.2"
+      }
+    },
+    {
+      "activityDisplayName": "Get Asset – ExecuteTime",
+      "activityId": "GetRobotAsset_1",
+      "resource": "asset",
+      "key": "ExecuteTime",
+      "id": "assetExecuteTimeExecuteTimeFalse",
+      "value": {
+        "name": {
+          "defaultValue": "ExecuteTime",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "BindingsVersion": "2.2"
+      }
+    },
+    {
+      "activityDisplayName": "Get Asset – GameList",
+      "activityId": "GetRobotAsset_2",
+      "resource": "asset",
+      "key": "GameList",
+      "id": "assetGameListGameListFalse",
+      "value": {
+        "name": {
+          "defaultValue": "GameList",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "BindingsVersion": "2.2"
+      }
+    },
+    {
+      "activityDisplayName": "Send Email – Novos recordes",
+      "activityId": "SendEmailConnections_1",
+      "resource": "Connection",
+      "key": "d660fbe8-6939-4776-bf9e-fa0e170e3a0b",
+      "id": "Connectiond660fbe8-6939-4776-bf9e-fa0e170e3a0bd660fbe8-6939-4776-bf9e-fa0e170e3a0bFalse",
+      "value": {
+        "ConnectionId": {
+          "defaultValue": "d660fbe8-6939-4776-bf9e-fa0e170e3a0b",
+          "isExpression": false,
+          "displayName": "Connection",
+          "description": "The connection to be used"
+        }
+      },
+      "metadata": {
+        "BindingsVersion": "2.2",
+        "Connector": "uipath-google-gmail",
+        "UseConnectionService": "True"
+      }
+    }
+  ]
+}

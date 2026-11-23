@@ -1,0 +1,33 @@
+{
+  "DisplayName": "Main",
+  "Tooltip": null,
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "in_Recipient",
+      "DisplayName": "in_Recipient",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "lorenzofeldens@gmail.com",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "in_SeriesIds",
+      "DisplayName": "in_SeriesIds",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "gnyj1xnx,34jm9j4o",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}
