@@ -18,22 +18,6 @@
       }
     },
     {
-      "activityDisplayName": "Get Asset – ExecuteTime",
-      "activityId": "GetRobotAsset_1",
-      "resource": "asset",
-      "key": "ExecuteTime",
-      "id": "assetExecuteTimeExecuteTimeFalse",
-      "value": {
-        "name": {
-          "defaultValue": "ExecuteTime",
-          "isExpression": false
-        }
-      },
-      "metadata": {
-        "BindingsVersion": "2.2"
-      }
-    },
-    {
       "activityDisplayName": "Get Asset – GameList",
       "activityId": "GetRobotAsset_2",
       "resource": "asset",

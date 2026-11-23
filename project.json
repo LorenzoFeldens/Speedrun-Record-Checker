@@ -1,7 +1,7 @@
 {
   "name": "Speedrun Record Checker",
   "projectId": "8635ccec-3394-4797-ba38-337ac712e9ce",
-  "description": "Daily check for new world records in Resident Evil and Dino Crisis games on speedrun.com; e-mails each new record with its video link.",
+  "description": "Verifica todos os dias os novos recordes mundiais no speedrun.com das séries do asset GameList e envia um e-mail com o link do vídeo.",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.System.Activities": "[26.10.1]",
@@ -11,7 +11,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.1",
   "studioVersion": "27.0.206.0",
-  "projectVersion": "1.0.0",
+  "projectVersion": "1.0.1",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
